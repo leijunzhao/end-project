@@ -1,0 +1,18 @@
+server:
+  port: 8989
+  context-path: /springboot
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    username: hr
+    password: hy
+    url: jdbc:oracle:thin:@192.168.0.67:1521:xe
+    driver-class-name: oracle.jdbc.OracleDriver
+  mvc:
+    view:
+      suffix: .jsp
+      prefix: /
+  http:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 100MB
