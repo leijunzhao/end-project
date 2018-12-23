@@ -1,13 +1,16 @@
 server:
   port: 8989
-  context-path: /springboot
+  context-path: /cmfz
+  jsp-servlet:
+    init-parameters:
+      development: true
 spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
-    username: hr
-    password: hy
-    url: jdbc:oracle:thin:@192.168.0.67:1521:xe
-    driver-class-name: oracle.jdbc.OracleDriver
+    username: root
+    password: root
+    url: jdbc:mysql://192.168.0.67:3306/endproject
+    driver-class-name: com.mysql.jdbc.Driver
   mvc:
     view:
       suffix: .jsp
