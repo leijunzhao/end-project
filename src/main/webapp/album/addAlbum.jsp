@@ -56,4 +56,7 @@
     <div>
         <a id="saaBtn">提交</a>
     </div>
+    <div>
+        <input type="reset" name="button" value="重置"/>
+    </div>
 </form>

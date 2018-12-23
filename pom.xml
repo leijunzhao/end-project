@@ -88,6 +88,13 @@
             <version>1.2.10</version>
         </dependency>
 
+        <!--获取上传音频的时长-->
+        <dependency>
+            <groupId>jave</groupId>
+            <artifactId>jave</artifactId>
+            <version>1.0.2</version>
+        </dependency>
+
     </dependencies>
 
     <build>

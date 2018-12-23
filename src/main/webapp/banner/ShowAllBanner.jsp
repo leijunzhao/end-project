@@ -73,7 +73,7 @@
             destroyMsg: {
                 norecord: {    // 在没有记录选择的时候执行
                     title: 'Warning',
-                    msg: 'No record is selected.'
+                    msg: '请先选择一行数据'
                 },
                 confirm: {       // 在选择一行的时候执行
                     title: 'Confirm',
@@ -90,7 +90,6 @@
                     '</td>' +
                     '</tr></table>';
             }
-
         });
     })
 </script>
