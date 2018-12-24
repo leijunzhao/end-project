@@ -1,16 +1,22 @@
 package com.baizhi.controller;
 
+import cn.afterturn.easypoi.excel.ExcelExportUtil;
+import cn.afterturn.easypoi.excel.entity.ExportParams;
 import com.baizhi.entity.Album;
 import com.baizhi.entity.AlbumDto;
 import com.baizhi.service.AlbumService;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.Date;
 import java.util.List;
 
@@ -49,5 +55,32 @@ public class AlbumController {
     @RequestMapping("queryAllAlbumByPage")
     public AlbumDto queryAllAlbumByPage(Integer page, Integer rows) {
         return albumService.queryAllAlbumByPage(page, rows);
+    }
+
+    //Excel导出
+    @RequestMapping("exportAllAlbum")
+    public void exportExcel(HttpServletResponse response) {
+        List<Album> albumList = albumService.queryAllAlbum();
+        for (Album album : albumList) {
+            String path = "F:/idea/EndProject/end-project/src/main/webapp/upload/" + album.getCoverImg();
+            album.setCoverImg(path);
+        }
+        //设置相应输出的头类型
+        String encode = null;
+        try {
+            encode = URLEncoder.encode("user.xls", "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        response.setHeader("content-disposition", "attachment;filename=" + encode);
+        response.setContentType("application/vnd.ms-excel");
+        Workbook workbook = ExcelExportUtil.exportExcel(new ExportParams("专辑章节", "章节"), Album.class, albumList);
+        try {
+            workbook.write(response.getOutputStream());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
     }
 }

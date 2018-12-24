@@ -48,7 +48,8 @@ public class ChapterController {
         chapter.setSize(audioFile.getSize() / 1024 / 1024 + "MB");
         chapter.setUrl(newFileName);
         chapter.setId(UUID.randomUUID().toString().replace("-", ""));
-        chapter.setUploadDate(new Date());
+        chapter.setUploadDate(new Date()
+        );
 
         chapterService.addChapter(chapter);
     }

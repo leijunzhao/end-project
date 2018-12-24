@@ -56,7 +56,14 @@
             location.href = "${pageContext.request.contextPath}/upload/uploadFile?url=" + path.url;
 
         }
-    }]
+    }, '-', {
+        text: "导出",
+        iconCls: 'icon-search',
+        handler: function () {
+            location.href = "${pageContext.request.contextPath}/album/exportAllAlbum";
+
+        }
+    }];
     $(function () {
         $('#album').treegrid({
             url: '${pageContext.request.contextPath}/album/queryAllAlbumByPage',

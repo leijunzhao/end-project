@@ -20,6 +20,27 @@
             <result column="uploadDate" property="uploadDate"/>
         </collection>
     </resultMap>
+    <select id="queryAllAlbum" resultMap="ac">
+        SELECT a.id           aid,
+               a.title        atitle,
+               a.count,
+               a.cover_img    coverImg,
+               a.score,
+               a.author,
+               a.broadcast,
+               a.brief,
+               a.publish_date publishDate,
+               c.id           cid,
+               c.title        ctitle,
+               c.size,
+               c.duration,
+               c.url,
+               c.upload_date  uploadDate,
+               c.album_id
+        from album a
+                 LEFT JOIN chapter c
+                           ON a.id = c.album_id
+    </select>
     <select id="queryAllAlbumByPage" resultMap="ac">
         SELECT b.aid,
                b.atitle,
