@@ -34,10 +34,6 @@
         <input type="file" name="audioFile"/>
     </div>
     <div>
-        <label for="publishDate">上传时间:</label>
-        <input class="easyui-datebox" type="text" name="uploadDate" data-options="required:true,editable:false"/>
-    </div>
-    <div>
         <input id="albumId" type="hidden" name="albumId">
     </div>
     <div>

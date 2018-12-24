@@ -3,7 +3,6 @@ package com.baizhi.controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.FileInputStream;
@@ -15,12 +14,14 @@ import java.net.URLEncoder;
 public class UploadFileController {
     //获取文件上传时的路径
     @RequestMapping("uploadFile")
-    public void uploadFile(HttpSession session, HttpServletResponse response, HttpServletRequest request, String url) throws Exception {
+    public void uploadFile(HttpSession session, HttpServletResponse response, String url) throws Exception {
         //上传的文件都是保存在/WEB-INF/upload目录下的子目录当中
         String fileSaveRootPath = session.getServletContext().getRealPath("/upload");
         response.setHeader("content-disposition", "attachment;filename=" + URLEncoder.encode(url, "UTF-8"));
+        response.setContentType("application/x-msdownload");
         //读取要下载的文件，保存到文件输入流
         FileInputStream in = new FileInputStream(fileSaveRootPath + "\\" + url);
+
         //创建输出流
         OutputStream out = response.getOutputStream();
         //创建缓冲区
