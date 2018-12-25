@@ -61,6 +61,7 @@ public class AlbumController {
     @RequestMapping("exportAllAlbum")
     public void exportExcel(HttpServletResponse response) {
         List<Album> albumList = albumService.queryAllAlbum();
+        String fileName = "专辑信息表" + new Date().toString() + ".xls";
         for (Album album : albumList) {
             String path = "F:/idea/EndProject/end-project/src/main/webapp/upload/" + album.getCoverImg();
             album.setCoverImg(path);
@@ -68,13 +69,13 @@ public class AlbumController {
         //设置相应输出的头类型
         String encode = null;
         try {
-            encode = URLEncoder.encode("user.xls", "UTF-8");
+            encode = URLEncoder.encode(fileName, "UTF-8");
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
         response.setHeader("content-disposition", "attachment;filename=" + encode);
         response.setContentType("application/vnd.ms-excel");
-        Workbook workbook = ExcelExportUtil.exportExcel(new ExportParams("专辑章节", "章节"), Album.class, albumList);
+        Workbook workbook = ExcelExportUtil.exportExcel(new ExportParams("专辑章节关系表格", "章节"), Album.class, albumList);
         try {
             workbook.write(response.getOutputStream());
         } catch (IOException e) {

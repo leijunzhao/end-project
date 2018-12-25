@@ -52,7 +52,7 @@
 
         //添加选项卡的函数
         function addTabs(title, iconCls, url) {
-            var a = $("#tt").tabs("exists", title)
+            var a = $("#tt").tabs("exists", title);
             if (a) {
                 $("#tt").tabs("select", title)
             } else {
