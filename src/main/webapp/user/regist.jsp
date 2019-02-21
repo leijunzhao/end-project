@@ -2,6 +2,8 @@
 
 <script type="text/javascript" src="${pageContext.request.contextPath }/js/echarts.min.js"></script>
 
+<script type="text/javascript" src="http://cdn-hangzhou.goeasy.io/goeasy.js"></script>
+
 <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
 <div id="main" style="width: 600px;height:400px;"></div>
 <script type="text/javascript">
@@ -30,7 +32,6 @@
 
     // 使用刚指定的配置项和数据显示图表。
     myChart.setOption(option);
-
     $.ajax({
         type: "post",
         url: "${pageContext.request.contextPath}/user/queryUser?week=3",
@@ -51,4 +52,29 @@
         }
 
     })
+
+    var goEasy = new GoEasy({
+        appkey: "BC-b68cdb659fd94878b214a1d9b8416eea"
+    });
+
+    goEasy.subscribe({
+        channel: "active",
+        onMessage: function (message) {
+            //alert(message.content);
+            var data = JSON.parse(message.content);
+            console.log(data);
+            myChart.setOption({
+                xAxis: {
+                    data: data.weeks
+                },
+                yAxis: {},
+                series: [{
+                    name: '用户注册时间段',
+                    type: 'bar',
+                    data: data.counts
+                }]
+            })
+        }
+    });
+
 </script>
